@@ -46,7 +46,7 @@ def most_expensive_baked_good():
     return make_response( most_expensive_serialized,   200  )
 
 @app.route('/baked_goods', methods = ['GET', 'POST'])
-def baked_goods():
+def create_baked_goods():
     if request.method == 'GET':
         baked_goods = [baked_good.to_dict() for baked_good in BakedGood.query.all()]
         return make_response(jsonify(baked_goods), 200)
@@ -66,7 +66,7 @@ def baked_goods():
         return make_response(jsonify(new_baked_good.to_dict()), 201)
     
 @app.route('/bakeries/<int:id>', methods=['GET', 'PATCH'])
-def patch_bakeries(id):
+def update_bakery(id):
     bakery = Bakery.query.filter_by(id=id).first()
     if not bakery:
         return make_response(jsonify({'message': 'Bakery not found'}), 404)
